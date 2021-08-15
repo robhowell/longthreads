@@ -2,10 +2,19 @@ import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 
+import { blue, darkGrey } from '~/styles/colors';
+import { spacing5, spacing17 } from '~/styles/spacing';
+
 const Main = styled.main`
+  color: ${darkGrey};
   margin: 0 auto;
-  max-width: 800px;
-  padding: 20px;
+  max-width: ${spacing17};
+  padding: ${spacing5};
+`;
+
+const PageTitle = styled.h1`
+  color: ${blue};
+  font-size: 1.5rem;
 `;
 
 export default function Home() {
@@ -19,9 +28,9 @@ export default function Home() {
       </Head>
 
       <Main>
-        <h1>
+        <PageTitle>
           Long Threads
-        </h1>
+        </PageTitle>
 
         Test
       </Main>

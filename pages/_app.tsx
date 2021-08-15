@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/globals.css';
+import '../src/styles/globals.css';
 import type { AppProps } from 'next/app';
 
 function LongThreadsApp({ Component, pageProps }: AppProps) {

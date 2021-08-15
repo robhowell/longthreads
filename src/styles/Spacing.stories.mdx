@@ -1,0 +1,62 @@
+<Meta title="Spacing" />
+
+import {
+  spacing1,
+  spacing2,
+  spacing3,
+  spacing4,
+  spacing5,
+  spacing6,
+  spacing7,
+  spacing8,
+  spacing9,
+  spacing10,
+  spacing11,
+  spacing12,
+  spacing13,
+  spacing14,
+  spacing15,
+  spacing16,
+  spacing17,
+} from './spacing';
+
+# Spacing
+
+A spacing scale is used across the app that provides a fixed set of spacing options for padding, margins and gaps. By limiting ourseves to a set of fixed values rather than using any specific number of pixels, we ensure consistency across components, speed up design and make it easier to maintain the app.
+
+export const Space = ({ sizeLabel, value }) => {
+  const valueNum = parseInt(value.replace('px', ''), 10);
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{
+        fontSize: '10px',
+        minWidth: '145px',
+        width: '145px'
+      }}><strong>Size {sizeLabel}</strong>: {value} (16px * {valueNum / 16})</div>
+      <div style={{
+        backgroundColor: 'darkblue',
+        height: '12px',
+        marginBottom: '5px',
+        width: value
+      }}></div>
+    </div>
+  );
+};
+
+<Space sizeLabel="1" value={spacing1} />
+<Space sizeLabel="2" value={spacing2} />
+<Space sizeLabel="3" value={spacing3} />
+<Space sizeLabel="4" value={spacing4} />
+<Space sizeLabel="5" value={spacing5} />
+<Space sizeLabel="6" value={spacing6} />
+<Space sizeLabel="7" value={spacing7} />
+<Space sizeLabel="8" value={spacing8} />
+<Space sizeLabel="9" value={spacing9} />
+<Space sizeLabel="10" value={spacing10} />
+<Space sizeLabel="11" value={spacing11} />
+<Space sizeLabel="12" value={spacing12} />
+<Space sizeLabel="13" value={spacing13} />
+<Space sizeLabel="14" value={spacing14} />
+<Space sizeLabel="15" value={spacing15} />
+<Space sizeLabel="16" value={spacing16} />
+<Space sizeLabel="17" value={spacing17} />

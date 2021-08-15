@@ -1,0 +1,19 @@
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs';
+
+import Button from './Button';
+
+<Meta title="Button" component={Button} />
+
+export const Template = (args) => <Button {...args} />;
+
+#  Button
+
+Note: While `<button>` elements in HTML have a default `type` value of `submit`, this is less frequently used in modern single page applications, so instead the Button component `type` prop has a default value of `button`.
+
+<Preview>
+  <Story name="Basic" args={{ children: 'Login' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+<ArgsTable of={Button} />

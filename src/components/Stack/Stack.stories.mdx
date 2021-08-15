@@ -1,0 +1,23 @@
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs';
+
+import Stack from './Stack';
+
+<Meta title="Layout/Stack" component={Stack} />
+
+export const Template = (args) => <Stack {...args} />;
+
+#  Stack
+
+<Preview>
+  <Story name="Default" args={{ children: (
+    <>
+    <div style={{height: '2rem', backgroundColor: '#ccc'}}/>
+    <div style={{height: '2rem', backgroundColor: '#ccc'}}/>
+    <div style={{height: '2rem', backgroundColor: '#ccc'}}/>
+    </>
+  ) }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+<ArgsTable of={Stack} />

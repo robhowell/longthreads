@@ -10,8 +10,42 @@ export const Template = (args) => <Button {...args} />;
 
 Note: While `<button>` elements in HTML have a default `type` value of `submit`, this is less frequently used in modern single page applications, so instead the Button component `type` prop has a default value of `button`.
 
+## Default (Medium size)
+
 <Preview>
-  <Story name="Basic" args={{ children: 'Login' }}>
+  <Story name="Default (Medium size)" args={{ children: 'Login' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Secondary
+
+<Preview>
+  <Story name="Secondary" args={{ children: 'Cancel', styling: 'secondary' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Tertiary
+
+<Preview>
+  <Story name="Tertiary" args={{ children: 'Close', styling: 'tertiary' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Small size
+
+<Preview>
+  <Story name="Small size" args={{ children: 'Login', size: 'sm' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Large size
+
+<Preview>
+  <Story name="Large size" args={{ children: 'Login', size: 'lg' }}>
     {Template.bind({})}
   </Story>
 </Preview>

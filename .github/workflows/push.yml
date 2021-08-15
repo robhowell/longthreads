@@ -3,8 +3,8 @@ name: Push
 on: [push]
 
 jobs:
-  build-lint-and-test:
-    name: Build, lint and test
+  lint-and-test:
+    name: Lint and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,6 +12,5 @@ jobs:
         with:
           node-version: 16.x
       - run: yarn install --frozen-lockfile
-      - run: yarn build
       - run: yarn lint
       - run: yarn test

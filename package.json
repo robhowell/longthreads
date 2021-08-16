@@ -11,7 +11,8 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "prepare": "husky install",
-    "pre-commit": "yarn lint && yarn test"
+    "pre-commit": "yarn lint && yarn test",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
   "dependencies": {
     "next": "11.0.1",
@@ -36,6 +37,7 @@
     "@types/styled-components": "^5.1.12",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.9.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.0.1",
     "husky": "^7.0.1",

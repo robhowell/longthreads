@@ -1,0 +1,35 @@
+import { useState } from 'react';
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs';
+
+import BareTextInput from './BareTextInput';
+
+<Meta title="BareTextInput" component={BareTextInput} />
+
+export const Template = (args) => {
+  const [value, setValue] = useState('');
+  return <BareTextInput {...args} value={value} onChange={
+    (e) => {setValue(e.target.value)}
+  } />;
+}
+
+#  BareTextInput
+
+An input that has the default input styling removed, to be nested within read-only components to make them editable.
+
+## Default
+
+<Preview>
+  <Story name="Default" args={{ }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Full width
+
+<Preview>
+  <Story name="Full width" args={{ fullWidth: true }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+<ArgsTable of={BareTextInput} />

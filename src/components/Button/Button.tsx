@@ -1,7 +1,7 @@
 import React, { ElementType, ReactNode } from "react";
 import styled, { css } from "styled-components";
 import { extraLightBlue, blue, grey } from "~/styles/colors";
-import { spacing2, spacing4, spacing5, spacing6 } from "~/styles/spacing";
+import { spacing3, spacing4, spacing5, spacing6 } from "~/styles/spacing";
 
 interface ButtonProps {
   as: ElementType | keyof JSX.IntrinsicElements;
@@ -21,14 +21,14 @@ const StyledButton = styled.button<{
   border-radius: 3px;
   color: white;
   font-size: 0.8rem;
-  padding: ${spacing2} ${spacing5};
+  padding: ${spacing3} ${spacing5};
 
   ${({ $size }) =>
     $size === "sm" &&
     css`
       border-radius: 2px;
       font-size: 0.7rem;
-      padding: ${spacing2} ${spacing4};
+      padding: ${spacing4} ${spacing4};
     `};
 
   ${({ $size }) =>

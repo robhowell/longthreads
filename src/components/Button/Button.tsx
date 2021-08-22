@@ -6,6 +6,7 @@ import { spacing2, spacing4, spacing5, spacing6 } from "~/styles/spacing";
 interface ButtonProps {
   as: ElementType | keyof JSX.IntrinsicElements;
   children: ReactNode;
+  onClick: () => {};
   type?: "button" | "submit" | "reset";
   size?: "sm" | "md" | "lg";
   styling?: "primary" | "secondary" | "tertiary";
@@ -65,11 +66,18 @@ const StyledButton = styled.button<{
 const Button = ({
   as,
   children,
+  onClick,
   size = "md",
   styling = "primary",
   type = "button",
 }: ButtonProps) => (
-  <StyledButton as={as} $size={size} $styling={styling} type={type}>
+  <StyledButton
+    as={as}
+    onClick={onClick}
+    $size={size}
+    $styling={styling}
+    type={type}
+  >
     {children}
   </StyledButton>
 );

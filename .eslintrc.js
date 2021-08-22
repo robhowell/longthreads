@@ -1,6 +1,6 @@
 module.exports = {
-  "extends": ["next", "next/core-web-vitals"],
+  extends: ["next", "next/core-web-vitals", "plugin:prettier/recommended"],
   rules: {
-    semi: "error"
-  }
+    semi: "error",
+  },
 };

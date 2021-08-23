@@ -8,6 +8,10 @@ export const Template = (args) => <Stack {...args} />;
 
 #  Stack
 
+The stack component allows you to stack elements vertically, with consistent spacing between elements. When you use the stack component, you can use the `size` prop to control the spacing between elements.
+
+Using the `Stack` component ensures that we do not need to add `margin-top` and `margin-bottom` to most elements nested within, except for rare cases.
+
 <Preview>
   <Story name="Default" args={{ children: (
     <>

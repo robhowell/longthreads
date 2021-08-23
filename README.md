@@ -2,6 +2,8 @@
 
 A todo list app for the long term.
 
+Storybook available at: <https://storybook.longthreads.com>
+
 ## Scripts
 
 - `yarn dev` - Run local dev server

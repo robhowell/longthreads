@@ -6,7 +6,7 @@ import { spacing2, spacing4, spacing5, spacing6 } from "~/styles/spacing";
 interface ButtonProps {
   as?: ElementType | keyof JSX.IntrinsicElements;
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   type?: "button" | "submit" | "reset";
   size?: "sm" | "md" | "lg";
   styling?: "primary" | "secondary" | "tertiary";
@@ -20,6 +20,9 @@ const StyledButton = styled.button<{
   border: 1px solid ${blue};
   border-radius: 3px;
   color: white;
+  display: inline-block;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   font-size: 0.8rem;
   padding: ${spacing2} ${spacing5};
 
@@ -53,6 +56,7 @@ const StyledButton = styled.button<{
       background-color: transparent;
       border: none;
       color: ${blue};
+      display: inline;
       padding: 0;
     `};
 

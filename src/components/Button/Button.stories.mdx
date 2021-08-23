@@ -10,6 +10,8 @@ export const Template = (args) => <Button {...args} />;
 
 Note: While `<button>` elements in HTML have a default `type` value of `submit`, this is less frequently used in modern single page applications, so instead the Button component `type` prop has a default value of `button`.
 
+If you want to render an element that navigates to a page that is styled as a `Button`, pass in `a` as the `as` prop, then you can use href to navigate as a standard link.
+
 ## Default (Medium size)
 
 <Preview>
@@ -46,6 +48,14 @@ Note: While `<button>` elements in HTML have a default `type` value of `submit`,
 
 <Preview>
   <Story name="Large size" args={{ children: 'Login', size: 'lg' }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+## Link
+
+<Preview>
+  <Story name="Link" args={{ children: 'About Us', as: 'a' }}>
     {Template.bind({})}
   </Story>
 </Preview>

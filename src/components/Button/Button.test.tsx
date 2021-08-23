@@ -5,7 +5,7 @@ import Button from "./Button";
 
 describe("Button", () => {
   it("should render button", () => {
-    render(<Button>Hello Button</Button>);
+    render(<Button onClick={() => {}}>Hello Button</Button>);
     expect(screen.getByText("Hello Button")).toBeInTheDocument();
   });
 });

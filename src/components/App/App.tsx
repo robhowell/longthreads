@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@material-ui/core/styles";
+import { styled, ThemeProvider, useTheme } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -21,8 +21,26 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import DoneAllIcon from "@material-ui/icons/DoneAll";
 import DoneIcon from "@material-ui/icons/Done";
 import TodayIcon from "@material-ui/icons/Today";
+import { createTheme } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
+
+export const themeOptions = {
+  palette: {
+    type: "light",
+    primary: {
+      main: "#3a4c7b",
+    },
+    secondary: {
+      main: "#f50057",
+    },
+  },
+  typography: {
+    fontFamily: "Noto Sans JP",
+  },
+};
+
+const longThreadsTheme = createTheme(themeOptions);
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
   open?: boolean;
@@ -73,7 +91,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-export default function PersistentDrawerLeft() {
+const App = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
@@ -90,130 +108,134 @@ export default function PersistentDrawerLeft() {
       <CssBaseline />
 
       <Box sx={{ display: "flex" }}>
-        <AppBar position="fixed" open={open}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              sx={{ mr: 2, ...(open && { display: "none" }) }}
-            >
-              <MenuIcon />
-            </IconButton>
+        <ThemeProvider theme={longThreadsTheme}>
+          <AppBar position="fixed" open={open}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                sx={{ mr: 2, ...(open && { display: "none" }) }}
+              >
+                <MenuIcon />
+              </IconButton>
 
-            <Typography variant="h6" noWrap component="h1">
-              Today
-            </Typography>
-          </Toolbar>
-        </AppBar>
+              <Typography variant="h6" noWrap component="h1">
+                Today
+              </Typography>
+            </Toolbar>
+          </AppBar>
 
-        <Drawer
-          sx={{
-            width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
+          <Drawer
+            sx={{
               width: drawerWidth,
-              boxSizing: "border-box",
-            },
-          }}
-          variant="persistent"
-          anchor="left"
-          open={open}
-        >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "ltr" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
+              flexShrink: 0,
+              "& .MuiDrawer-paper": {
+                width: drawerWidth,
+                boxSizing: "border-box",
+              },
+            }}
+            variant="persistent"
+            anchor="left"
+            open={open}
+          >
+            <DrawerHeader>
+              <IconButton onClick={handleDrawerClose}>
+                {theme.direction === "ltr" ? (
+                  <ChevronLeftIcon />
+                ) : (
+                  <ChevronRightIcon />
+                )}
+              </IconButton>
+            </DrawerHeader>
 
-          <Divider />
+            <Divider />
 
-          <List>
+            <List>
+              <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <TodayIcon />
+                  </ListItemIcon>
+
+                  <ListItemText primary="Today" />
+                </ListItem>
+              </List>
+
+              <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DoneIcon />
+                  </ListItemIcon>
+
+                  <ListItemText primary="Example project" />
+                </ListItem>
+              </List>
+
+              <List>
+                <ListItem button>
+                  <ListItemIcon>
+                    <DoneAllIcon />
+                  </ListItemIcon>
+
+                  <ListItemText primary="All" />
+                </ListItem>
+              </List>
+            </List>
+
+            <Divider />
+
             <List>
               <ListItem button>
                 <ListItemIcon>
-                  <TodayIcon />
+                  <SettingsIcon />
                 </ListItemIcon>
 
-                <ListItemText primary="Today" />
+                <ListItemText primary="Settings" />
               </ListItem>
             </List>
+          </Drawer>
 
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <DoneIcon />
-                </ListItemIcon>
+          <Main open={open}>
+            <DrawerHeader />
 
-                <ListItemText primary="Example project" />
-              </ListItem>
-            </List>
+            <Typography paragraph>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Rhoncus dolor purus non enim praesent elementum facilisis leo vel.
+              Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
+              gravida rutrum quisque non tellus. Convallis convallis tellus id
+              interdum velit laoreet id donec ultrices. Odio morbi quis commodo
+              odio aenean sed adipiscing. Amet nisl suscipit adipiscing bibendum
+              est ultricies integer quis. Cursus euismod quis viverra nibh cras.
+              Metus vulputate eu scelerisque felis imperdiet proin fermentum
+              leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt
+              lobortis feugiat vivamus at augue. At augue eget arcu dictum
+              varius duis at consectetur lorem. Velit sed ullamcorper morbi
+              tincidunt. Lorem donec massa sapien faucibus et molestie ac.
+            </Typography>
 
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <DoneAllIcon />
-                </ListItemIcon>
-
-                <ListItemText primary="All" />
-              </ListItem>
-            </List>
-          </List>
-
-          <Divider />
-
-          <List>
-            <ListItem button>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-
-              <ListItemText primary="Settings" />
-            </ListItem>
-          </List>
-        </Drawer>
-
-        <Main open={open}>
-          <DrawerHeader />
-
-          <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-            dolor purus non enim praesent elementum facilisis leo vel. Risus at
-            ultrices mi tempus imperdiet. Semper risus in hendrerit gravida
-            rutrum quisque non tellus. Convallis convallis tellus id interdum
-            velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean
-            sed adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-            integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-            eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-            quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-            vivamus at augue. At augue eget arcu dictum varius duis at
-            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-            donec massa sapien faucibus et molestie ac.
-          </Typography>
-
-          <Typography paragraph>
-            Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-            ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-            elementum integer enim neque volutpat ac tincidunt. Ornare
-            suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
-            volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
-            Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
-            ornare massa eget egestas purus viverra accumsan in. In hendrerit
-            gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
-            aliquam sem et tortor. Habitant morbi tristique senectus et.
-            Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean
-            euismod elementum nisi quis eleifend. Commodo viverra maecenas
-            accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-            ultrices sagittis orci a.
-          </Typography>
-        </Main>
+            <Typography paragraph>
+              Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
+              ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
+              elementum integer enim neque volutpat ac tincidunt. Ornare
+              suspendisse sed nisi lacus sed viverra tellus. Purus sit amet
+              volutpat consequat mauris. Elementum eu facilisis sed odio morbi.
+              Euismod lacinia at quis risus sed vulputate odio. Morbi tincidunt
+              ornare massa eget egestas purus viverra accumsan in. In hendrerit
+              gravida rutrum quisque non tellus orci ac. Pellentesque nec nam
+              aliquam sem et tortor. Habitant morbi tristique senectus et.
+              Adipiscing elit duis tristique sollicitudin nibh sit. Ornare
+              aenean euismod elementum nisi quis eleifend. Commodo viverra
+              maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin
+              aliquam ultrices sagittis orci a.
+            </Typography>
+          </Main>
+        </ThemeProvider>
       </Box>
     </>
   );
-}
+};
+
+export default App;

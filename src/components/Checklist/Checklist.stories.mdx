@@ -1,0 +1,19 @@
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs';
+
+import Checklist from './Checklist';
+
+<Meta title="Checklist" component={Checklist} />
+
+export const Template = (args) => <Checklist {...args} />;
+
+#  Checklist
+
+## Default
+
+<Preview>
+  <Story name="Default" args={{ }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+<ArgsTable of={Checklist} />

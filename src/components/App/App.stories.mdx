@@ -1,0 +1,19 @@
+import { ArgsTable, Preview, Story } from '@storybook/addon-docs';
+
+import App from './App';
+
+<Meta title="App" component={App} />
+
+export const Template = (args) => <App {...args} />;
+
+#  App
+
+## Default
+
+<Preview>
+  <Story name="Default" args={{ }}>
+    {Template.bind({})}
+  </Story>
+</Preview>
+
+<ArgsTable of={App} />

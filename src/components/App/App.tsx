@@ -22,6 +22,7 @@ import DoneAllIcon from "@material-ui/icons/DoneAll";
 import DoneIcon from "@material-ui/icons/Done";
 import TodayIcon from "@material-ui/icons/Today";
 import { createTheme } from "@material-ui/core/styles";
+import { useMediaQuery } from "react-responsive";
 
 const drawerWidth = 240;
 
@@ -94,14 +95,82 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const App = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
+  const [isMobileOpen, setIsMobileOpen] = React.useState(false);
+  const toggleIsMobileOpen = () => setIsMobileOpen(!isMobileOpen);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    toggleIsMobileOpen();
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
+    toggleIsMobileOpen();
   };
+
+  const drawerContent = (
+    <>
+      <DrawerHeader>
+        <IconButton onClick={handleDrawerClose}>
+          {theme.direction === "ltr" ? (
+            <ChevronLeftIcon />
+          ) : (
+            <ChevronRightIcon />
+          )}
+        </IconButton>
+      </DrawerHeader>
+
+      <Divider />
+
+      <List>
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <TodayIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="Today" />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <DoneIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="Example project" />
+          </ListItem>
+        </List>
+
+        <List>
+          <ListItem button>
+            <ListItemIcon>
+              <DoneAllIcon />
+            </ListItemIcon>
+
+            <ListItemText primary="All" />
+          </ListItem>
+        </List>
+      </List>
+
+      <Divider />
+
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+
+          <ListItemText primary="Settings" />
+        </ListItem>
+      </List>
+    </>
+  );
+
+  const container =
+    typeof window !== "undefined" ? () => window?.document?.body : undefined;
 
   return (
     <>
@@ -109,14 +178,14 @@ const App = () => {
 
       <Box sx={{ display: "flex" }}>
         <ThemeProvider theme={longThreadsTheme}>
-          <AppBar position="fixed" open={open}>
+          <AppBar position="fixed" open={isMobile ? isMobileOpen : open}>
             <Toolbar>
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 onClick={handleDrawerOpen}
                 edge="start"
-                sx={{ mr: 2, ...(open && { display: "none" }) }}
+                sx={{ mr: 2, ...(!isMobile && open && { display: "none" }) }}
               >
                 <MenuIcon />
               </IconButton>
@@ -127,77 +196,44 @@ const App = () => {
             </Toolbar>
           </AppBar>
 
-          <Drawer
-            sx={{
-              width: drawerWidth,
-              flexShrink: 0,
-              "& .MuiDrawer-paper": {
+          {isMobile ? (
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={isMobileOpen}
+              onClose={toggleIsMobileOpen}
+              ModalProps={{
+                keepMounted: true, // Better open performance on mobile.
+              }}
+              sx={{
+                display: { xs: "block", sm: "none" },
+                "& .MuiDrawer-paper": {
+                  boxSizing: "border-box",
+                  width: drawerWidth,
+                },
+              }}
+            >
+              {drawerContent}
+            </Drawer>
+          ) : (
+            <Drawer
+              sx={{
                 width: drawerWidth,
-                boxSizing: "border-box",
-              },
-            }}
-            variant="persistent"
-            anchor="left"
-            open={open}
-          >
-            <DrawerHeader>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "ltr" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </DrawerHeader>
+                flexShrink: 0,
+                "& .MuiDrawer-paper": {
+                  width: drawerWidth,
+                  boxSizing: "border-box",
+                },
+              }}
+              variant="persistent"
+              anchor="left"
+              open={open}
+            >
+              {drawerContent}
+            </Drawer>
+          )}
 
-            <Divider />
-
-            <List>
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <TodayIcon />
-                  </ListItemIcon>
-
-                  <ListItemText primary="Today" />
-                </ListItem>
-              </List>
-
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DoneIcon />
-                  </ListItemIcon>
-
-                  <ListItemText primary="Example project" />
-                </ListItem>
-              </List>
-
-              <List>
-                <ListItem button>
-                  <ListItemIcon>
-                    <DoneAllIcon />
-                  </ListItemIcon>
-
-                  <ListItemText primary="All" />
-                </ListItem>
-              </List>
-            </List>
-
-            <Divider />
-
-            <List>
-              <ListItem button>
-                <ListItemIcon>
-                  <SettingsIcon />
-                </ListItemIcon>
-
-                <ListItemText primary="Settings" />
-              </ListItem>
-            </List>
-          </Drawer>
-
-          <Main open={open}>
+          <Main open={isMobile ? isMobileOpen : open}>
             <DrawerHeader />
 
             <Typography paragraph>
